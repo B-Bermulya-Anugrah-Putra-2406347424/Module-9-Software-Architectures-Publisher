@@ -9,3 +9,9 @@ Kesamaan URL ini mengindikasikan bahwa baik program *publisher* maupun *subscrib
 ### Running RabbitMQ
 Berikut adalah tampilan RabbitMQ Management UI yang membuktikan *message broker* telah berjalan di Docker lokal:
 ![RabbitMQ UI](assets/images/rabbitmq_ui.png)
+
+### Event Processing
+![Console Output](assets/images/console_output.png)
+
+**Penjelasan Alur Kejadian:**
+Ketika perintah `cargo run` dieksekusi pada *publisher*, program tersebut secara instan memproduksi dan mengirimkan 5 *event messages* secara berurutan menuju *message broker* (RabbitMQ) melalui protokol AMQP. Di sisi lain, karena program *subscriber* sudah dalam state *listening* secara asinkron terhadap antrean (*queue*) yang sama di RabbitMQ, *subscriber* langsung mendeteksi kedatangan *event* tersebut, mengonsumsinya (*consume*), dan memprosesnya (dalam hal ini, mencetak isinya ke *console*). Ini mendemonstrasikan sifat *decoupled* dari *Event-Driven Architecture*.
