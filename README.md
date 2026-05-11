@@ -16,6 +16,6 @@ Berikut adalah tampilan RabbitMQ Management UI yang membuktikan *message broker*
 Ketika perintah `cargo run` dieksekusi pada *publisher*, program tersebut secara instan memproduksi dan mengirimkan 5 *event messages* secara berurutan menuju *message broker* (RabbitMQ) melalui protokol AMQP. Di sisi lain, karena program *subscriber* sudah dalam state *listening* secara asinkron terhadap antrean (*queue*) yang sama di RabbitMQ, *subscriber* langsung mendeteksi kedatangan *event* tersebut, mengonsumsinya (*consume*), dan memprosesnya (dalam hal ini, mencetak isinya ke *console*). Ini mendemonstrasikan sifat *decoupled* dari *Event-Driven Architecture*.
 
 ### Monitoring Chart
-![Chart Spike](chart_spike.png)
+![Chart Spike](assets/images/chart_spike.png)
 
 Lonjakan tajam (*spike*) yang terlihat pada grafik "Message rates" merepresentasikan lonjakan volume *traffic* secara mendadak. Setiap kali program *publisher* dijalankan, ia langsung menembakkan sekumpulan pesan ke dalam *exchange/queue* dalam waktu yang sangat singkat. Grafik RabbitMQ mencatat metrik "Publish" dan "Deliver/Get" per detik. Oleh karena itu, *spike* ini adalah visualisasi langsung dari *throughput* sistem pada milidetik spesifik tersebut di mana *publisher* melakukan *push* data dan *subscriber* secara bersamaan melakukan *pull/consume* data hingga antrean kembali kosong (titik nol pada grafik).
